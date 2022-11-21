@@ -1,3 +1,5 @@
+using Trace = Padutronics.Diagnostics.Tracing.Trace<Padutronics.Gaming.Application>;
+
 namespace Padutronics.Gaming;
 
 public sealed class Application
@@ -11,6 +13,10 @@ public sealed class Application
 
     public void Run()
     {
+        Trace.CallStart();
+
         game.Run();
+
+        Trace.CallEnd();
     }
 }

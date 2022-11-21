@@ -15,4 +15,7 @@
         <RepositoryUrl>https://github.com/Padutronics/Padutronics.Gaming</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
     </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Padutronics.Diagnostics.Tracing" Version="0.2.0" />
+    </ItemGroup>
 </Project>
