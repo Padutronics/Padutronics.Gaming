@@ -1,5 +1,6 @@
 using Padutronics.Gaming.Bootstrapping;
 using System.Collections.Generic;
+using System.Linq;
 
 using Trace = Padutronics.Diagnostics.Tracing.Trace<Padutronics.Gaming.Application>;
 
@@ -16,11 +17,25 @@ public sealed class Application
         this.game = game;
     }
 
+    private IEnumerable<IBootstrapper> OrderBootstrappers(IEnumerable<IBootstrapper> bootstrappers)
+    {
+        Trace.CallStart($"Ordering {bootstrappers.Count()} bootstrappers.");
+
+        IEnumerable<IBootstrapper> orderedBootstrappers = bootstrappers
+            .OrderBy(bootstrapper => bootstrapper.RunOrder)
+            .ToList();
+
+        Trace.CallEnd($"Bootstrappers in order: {string.Join(", ", orderedBootstrappers.Select(bootstrapper => bootstrapper.GetType()))}.");
+
+        return orderedBootstrappers;
+    }
+
     public void Run()
     {
         Trace.CallStart();
 
-        foreach (IBootstrapper bootstrapper in bootstrappers)
+        IEnumerable<IBootstrapper> orderedBootstrappers = OrderBootstrappers(bootstrappers);
+        foreach (IBootstrapper bootstrapper in orderedBootstrappers)
         {
             bootstrapper.Run();
         }
