@@ -16,6 +16,7 @@
         <RepositoryType>Git</RepositoryType>
     </PropertyGroup>
     <ItemGroup>
+        <PackageReference Include="Padutronics.Diagnostics.Debugging" Version="0.2.0" />
         <PackageReference Include="Padutronics.Diagnostics.Tracing" Version="0.2.0" />
     </ItemGroup>
 </Project>
